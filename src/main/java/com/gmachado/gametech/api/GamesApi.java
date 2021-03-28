@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.websocket.server.PathParam;
 
 @RestController
-@RequestMapping("/games")
+@RequestMapping("public/games")
 public class GamesApi {
 
     private final GamesService service;
