@@ -1,11 +1,15 @@
 package com.gmachado.gametech.api;
 
-import com.gmachado.gametech.model.Games;
+import com.gmachado.gametech.mapper.GamesMapper;
+import com.gmachado.gametech.representation.GameDetailRepresentation;
+import com.gmachado.gametech.representation.GamesRepresentation;
 import com.gmachado.gametech.service.GamesService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import javax.websocket.server.PathParam;
 
@@ -20,7 +24,11 @@ public class GamesApi {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Games> getGames(@PathParam("sort") String sort, @PathParam("filters") String filters) {
-        return ResponseEntity.ok(service.getGames(sort, filters));
+    public ResponseEntity<GamesRepresentation> getGames(@PathParam("sort") String sort, @PathParam("filters") String filters) {
+        return ResponseEntity.ok(
+                GamesMapper.toRepresentation(
+                        service.getGames(sort, filters)
+                )
+        );
     }
 }

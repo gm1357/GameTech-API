@@ -1,6 +1,7 @@
 package com.gmachado.gametech.repository;
 
-import com.gmachado.gametech.model.Games;
+import com.gmachado.gametech.domain.GamesDomain;
+import com.gmachado.gametech.representation.GameDetailRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -16,16 +17,16 @@ public class GamesRepository {
         this.webClient = webClient;
     }
 
-    public Mono<Games> getGames(String sort, String filters) {
+    public Mono<GamesDomain> getGames(String sort, String filters) {
         String url = "/games/?api_key=" + apiKey +
                 "&format=json" +
-                "&field_list=name,deck,cover,guid" +
+                "&field_list=name,deck,image,guid" +
                 "&sort=" + sort +
                 "&filter=" + filters;
         return webClient
                 .get()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(Games.class);
+                .bodyToMono(GamesDomain.class);
     }
 }

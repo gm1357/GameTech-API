@@ -1,8 +1,12 @@
 package com.gmachado.gametech.service;
 
-import com.gmachado.gametech.model.Games;
+import com.gmachado.gametech.domain.GamesDomain;
+import com.gmachado.gametech.representation.GameDetailRepresentation;
 import com.gmachado.gametech.repository.GamesRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class GamesService {
@@ -13,7 +17,9 @@ public class GamesService {
         this.repository = repository;
     }
 
-    public Games getGames(String sort, String filters) {
-        return repository.getGames(sort, filters).block();
+    public GamesDomain getGames(String sort, String filters) {
+        return Optional
+                .ofNullable(repository.getGames(sort, filters).block())
+                .orElse(new GamesDomain(new ArrayList<>()));
     }
 }

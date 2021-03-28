@@ -1,9 +1,17 @@
-package com.gmachado.gametech.model;
+package com.gmachado.gametech.representation;
 
-public class Game {
+public class GameSummaryRepresentation {
     private String name;
     private String deck;
     private String cover;
+
+    public GameSummaryRepresentation(String name, String deck, String cover, String guid) {
+        this.name = name;
+        this.deck = deck;
+        this.cover = cover;
+        this.guid = guid;
+    }
+
     private String guid;
 
     public String getName() {
