@@ -4,14 +4,6 @@ public class GameSummaryRepresentation {
     private String name;
     private String deck;
     private String cover;
-
-    public GameSummaryRepresentation(String name, String deck, String cover, String guid) {
-        this.name = name;
-        this.deck = deck;
-        this.cover = cover;
-        this.guid = guid;
-    }
-
     private String guid;
 
     public String getName() {
@@ -28,5 +20,21 @@ public class GameSummaryRepresentation {
 
     public String getGuid() {
         return guid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDeck(String deck) {
+        this.deck = deck;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 }

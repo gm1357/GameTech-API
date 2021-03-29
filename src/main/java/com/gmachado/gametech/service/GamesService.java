@@ -1,6 +1,8 @@
 package com.gmachado.gametech.service;
 
+import com.gmachado.gametech.domain.GameDetailDomain;
 import com.gmachado.gametech.domain.GamesDomain;
+import com.gmachado.gametech.domain.ResultDomain;
 import com.gmachado.gametech.representation.GameDetailRepresentation;
 import com.gmachado.gametech.repository.GamesRepository;
 import org.springframework.stereotype.Service;
@@ -21,5 +23,12 @@ public class GamesService {
         return Optional
                 .ofNullable(repository.getGames(sort, filters).block())
                 .orElse(new GamesDomain(new ArrayList<>()));
+    }
+
+    public GameDetailDomain getGame(String guid) {
+        ResultDomain<GameDetailDomain> gameDetailDomainResultDomain = Optional
+                .ofNullable(repository.getGame(guid).block())
+                .orElse(new ResultDomain<>());
+        return gameDetailDomainResultDomain.getResults();
     }
 }

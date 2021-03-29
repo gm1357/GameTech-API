@@ -1,5 +1,6 @@
 package com.gmachado.gametech.api;
 
+import com.gmachado.gametech.mapper.GameDetailMapper;
 import com.gmachado.gametech.mapper.GamesMapper;
 import com.gmachado.gametech.representation.GameDetailRepresentation;
 import com.gmachado.gametech.representation.GamesRepresentation;
@@ -28,6 +29,15 @@ public class GamesApi {
         return ResponseEntity.ok(
                 GamesMapper.toRepresentation(
                         service.getGames(sort, filters)
+                )
+        );
+    }
+
+    @RequestMapping(value = "/{guid}", method = RequestMethod.GET)
+    public ResponseEntity<GameDetailRepresentation> getGame(@PathVariable("guid") String guid) {
+        return ResponseEntity.ok(
+                GameDetailMapper.toRepresentation(
+                        service.getGame(guid)
                 )
         );
     }
