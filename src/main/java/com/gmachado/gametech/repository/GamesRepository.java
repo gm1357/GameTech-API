@@ -20,11 +20,11 @@ public class GamesRepository {
         this.webClient = webClient;
     }
 
-    public Mono<GamesDomain> getGames(String sort, String filters) {
+    public Mono<GamesDomain> getGames(String sort, String filters, String offset) {
         String fields = "name,deck,image,guid";
         String url = String.format(
-                "/games/?api_key=%s&format=%s&field_list=%s&sort=%s&filter=%s",
-                apiKey, JSON_FORMAT, fields, sort, filters);
+                "/games/?api_key=%s&format=%s&field_list=%s&sort=%s&filter=%s&offset=%s",
+                apiKey, JSON_FORMAT, fields, sort, filters, offset);
         return webClient
                 .get()
                 .uri(url)

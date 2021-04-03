@@ -18,9 +18,9 @@ public class GamesService {
         this.repository = repository;
     }
 
-    public GamesDomain getGames(String sort, String filters) {
+    public GamesDomain getGames(String sort, String filters, String offset) {
         return Optional
-                .ofNullable(repository.getGames(sort, filters).block())
+                .ofNullable(repository.getGames(sort, filters, offset).block())
                 .orElse(new GamesDomain(new ArrayList<>()));
     }
 

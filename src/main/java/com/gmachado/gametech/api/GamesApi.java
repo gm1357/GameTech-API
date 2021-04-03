@@ -24,10 +24,13 @@ public class GamesApi {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<GamesRepresentation> getGames(@PathParam("sort") String sort, @PathParam("filters") String filters) {
+    public ResponseEntity<GamesRepresentation> getGames(
+            @PathParam("sort") String sort,
+            @PathParam("filters") String filters,
+            @PathParam("offset") String offset) {
         return ResponseEntity.ok(
                 GamesMapper.toRepresentation(
-                        service.getGames(sort, filters)
+                        service.getGames(sort, filters, offset)
                 )
         );
     }
