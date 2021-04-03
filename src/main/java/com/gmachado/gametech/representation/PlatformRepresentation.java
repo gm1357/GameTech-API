@@ -1,8 +1,13 @@
 package com.gmachado.gametech.representation;
 
 public class PlatformRepresentation {
+    private String id;
     private String name;
     private String abbreviation;
+
+    public String getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -10,6 +15,10 @@ public class PlatformRepresentation {
 
     public String getAbbreviation() {
         return abbreviation;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {

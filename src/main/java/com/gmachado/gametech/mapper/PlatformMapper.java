@@ -9,6 +9,7 @@ public class PlatformMapper {
 
     public static PlatformRepresentation toRepresentation(PlatformDomain domain) {
         PlatformRepresentation representation = new PlatformRepresentation();
+        representation.setId(domain.getId());
         representation.setName(domain.getName());
         representation.setAbbreviation(domain.getAbbreviation());
         return representation;

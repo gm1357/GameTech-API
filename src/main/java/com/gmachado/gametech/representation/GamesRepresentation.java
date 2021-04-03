@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class GamesRepresentation {
+    private List<GameSummaryRepresentation> games;
+
     public GamesRepresentation(List<GameSummaryRepresentation> games) {
         this.games = games;
     }
@@ -12,6 +14,4 @@ public class GamesRepresentation {
     public List<GameSummaryRepresentation> getGames() {
         return games;
     }
-
-    private List<GameSummaryRepresentation> games;
 }
