@@ -3,6 +3,7 @@ package com.gmachado.gametech.configuration;
 import com.gmachado.gametech.domain.UserDomain;
 import com.gmachado.gametech.repository.UsersRepository;
 import com.gmachado.gametech.service.TokenService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+@Profile("prod")
 public class AuthTokenFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
     private final UsersRepository usersRepository;

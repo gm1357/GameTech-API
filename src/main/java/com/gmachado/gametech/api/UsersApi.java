@@ -5,6 +5,7 @@ import com.gmachado.gametech.representation.TokenRepresentation;
 import com.gmachado.gametech.representation.UserRepresentation;
 import com.gmachado.gametech.service.TokenService;
 import com.gmachado.gametech.service.UsersService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
