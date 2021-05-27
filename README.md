@@ -15,7 +15,7 @@ Firstly you need to create a enviroment variable `GB_API_KEY` with your key.
 
 Then, you can either:
 
- - Execute the `main` method in the `br.com.personal.webhookreceiver.WebhookReceiverApplication.java` class from your IDE.
+ - Execute the `main` method in the `com.gmachado.gametech.GametechApplication.java` class from your IDE.
 
  - Or use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
