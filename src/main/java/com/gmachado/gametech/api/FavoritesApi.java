@@ -1,6 +1,7 @@
 package com.gmachado.gametech.api;
 
 import com.gmachado.gametech.domain.UserDomain;
+import com.gmachado.gametech.exception.GameNotFoundException;
 import com.gmachado.gametech.representation.FavoriteRepresentation;
 import com.gmachado.gametech.service.FavoritesService;
 import org.springframework.http.HttpStatus;
@@ -28,13 +29,19 @@ public class FavoritesApi {
     public ResponseEntity<FavoriteRepresentation> saveFavorite(@RequestBody @Valid FavoriteRepresentation representation,
                                                                UriComponentsBuilder uriBuilder,
                                                                Authentication authentication) {
-        Long userId = ((UserDomain) authentication.getPrincipal()).getId();
-        if (userId.equals(representation.getUserId())) {
-            FavoriteRepresentation createdFavorite = service.saveFavorite(representation);
-            URI uri = uriBuilder.path("/favorites/{id}").buildAndExpand(createdFavorite.getGameGuid()).toUri();
-            return ResponseEntity.created(uri).body(createdFavorite);
-        } else {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Wrong user ID");
+        try {
+            Long userId = ((UserDomain) authentication.getPrincipal()).getId();
+            if (userId.equals(representation.getUserId())) {
+                FavoriteRepresentation createdFavorite = service.saveFavorite(representation);
+                URI uri = uriBuilder.path("/favorites/{id}").buildAndExpand(createdFavorite.getGameGuid()).toUri();
+                return ResponseEntity.created(uri).body(createdFavorite);
+            } else {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Wrong user ID");
+            }
+        } catch (GameNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    String.format("Game with id %s not found", representation.getGameGuid()));
         }
     }
 

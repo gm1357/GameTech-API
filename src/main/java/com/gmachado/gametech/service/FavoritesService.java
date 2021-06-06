@@ -2,6 +2,7 @@ package com.gmachado.gametech.service;
 
 import com.gmachado.gametech.domain.FavoriteDomain;
 import com.gmachado.gametech.domain.GameSummaryDomain;
+import com.gmachado.gametech.exception.GameNotFoundException;
 import com.gmachado.gametech.mapper.FavoritesMapper;
 import com.gmachado.gametech.repository.FavoritesRepository;
 import com.gmachado.gametech.representation.FavoriteRepresentation;
@@ -21,7 +22,7 @@ public class FavoritesService {
         this.gamesService = gamesService;
     }
 
-    public FavoriteRepresentation saveFavorite(FavoriteRepresentation representation) {
+    public FavoriteRepresentation saveFavorite(FavoriteRepresentation representation) throws GameNotFoundException {
         GameSummaryDomain game = gamesService.getGameSummary(representation.getGameGuid());
         FavoriteDomain favoriteDomain = new FavoriteDomain();
         favoriteDomain.setGameGuid(game.getGuid());
