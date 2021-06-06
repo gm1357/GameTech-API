@@ -12,8 +12,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping("public/users")
@@ -30,8 +32,11 @@ public class UsersApi {
     }
 
     @PostMapping
-    public ResponseEntity<UserRepresentation> createUser(@Valid @RequestBody UserRepresentation user) {
-        return ResponseEntity.created(null).body(service.createUser(user));
+    public ResponseEntity<UserRepresentation> createUser(@Valid @RequestBody UserRepresentation user,
+                                                         UriComponentsBuilder uriBuilder) {
+        UserRepresentation createdUser = service.createUser(user);
+        URI uri = uriBuilder.path("/public/auth").build().toUri();
+        return ResponseEntity.created(uri).body(createdUser);
     }
 
     @PostMapping("/auth")

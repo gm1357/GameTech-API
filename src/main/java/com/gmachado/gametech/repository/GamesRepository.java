@@ -1,6 +1,7 @@
 package com.gmachado.gametech.repository;
 
 import com.gmachado.gametech.domain.GameDetailDomain;
+import com.gmachado.gametech.domain.GameSummaryDomain;
 import com.gmachado.gametech.domain.GamesDomain;
 import com.gmachado.gametech.domain.ResultDomain;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +42,17 @@ public class GamesRepository {
                 .get()
                 .uri(url)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<>() {
-                });
+                .bodyToMono(new ParameterizedTypeReference<>() {});
+    }
+    public Mono<ResultDomain<GameSummaryDomain>> getGameSummary(String guid) {
+        String fields = "name,deck,image,guid";
+        String url = String.format(
+                "/game/%s/?api_key=%s&format=%s&field_list=%s",
+                guid, apiKey, JSON_FORMAT, fields);
+        return webClient
+                .get()
+                .uri(url)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<>() {});
     }
 }

@@ -1,6 +1,7 @@
 package com.gmachado.gametech.service;
 
 import com.gmachado.gametech.domain.GameDetailDomain;
+import com.gmachado.gametech.domain.GameSummaryDomain;
 import com.gmachado.gametech.domain.GamesDomain;
 import com.gmachado.gametech.domain.ResultDomain;
 import com.gmachado.gametech.repository.GamesRepository;
@@ -29,5 +30,11 @@ public class GamesService {
                 .ofNullable(repository.getGame(guid).block())
                 .orElse(new ResultDomain<>());
         return gameDetailDomainResultDomain.getResults();
+    }
+    public GameSummaryDomain getGameSummary(String guid) {
+        ResultDomain<GameSummaryDomain> gameSummaryDomainResultDomain = Optional
+                .ofNullable(repository.getGameSummary(guid).block())
+                .orElse(new ResultDomain<>());
+        return gameSummaryDomainResultDomain.getResults();
     }
 }
